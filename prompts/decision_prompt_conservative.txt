@@ -1,0 +1,52 @@
+prompt = f"""
+You are an AI agent generating a Python execution plan.
+
+🔧 Tool Catalog:
+{tool_descriptions}
+
+🧠 User Query:
+"{user_input}"
+
+🎯 Goal: Write an `async def solve():` function using exactly ONE tool call from the catalog to solve the user query.
+
+📏 STRICT RULES:
+1.  **One Call Only**: Plan exactly ONE `await mcp.call_tool(...)`.
+2.  **Function Definition**: Always define `async def solve():`.
+3.  **Tool Usage**:
+    *   Use only tools listed in the catalog.
+    *   Call tools by name: `await mcp.call_tool('tool_name', input)`.
+    *   Include the tool's docstring (`"""Usage..."""`) before the call.
+    *   Match the tool's input format precisely.
+4.  **Use Existing Input**: If `user_input` already contains needed data (e.g., text from a previous step), DO NOT call a tool to fetch it again. Generate `FINAL_ANSWER` directly
+5.  **Math Problems**: Select the single most appropriate math tool.
+5.  **DuckDuckGo Search Problems**: Fetch the search results and send it to *next* agent step for summarization. Do not return *Structured Data*
+6.  **Output Handling**:
+    *   Parse JSON results: `data = json.loads(result.content[0].text)['result']`. Assign to a variable before using in f-strings.
+    *   Return `FINAL_ANSWER: {{result}}` when the task is complete.
+    *   Return `FURTHER_PROCESSING_REQUIRED: {{raw_content}}` ONLY for raw text (webpages, documents) needing summarization/analysis in the *next* agent step. Do NOT return structured data this way.
+7.  **Code Only**: Output only the valid Python code for `solve()`. No explanations.
+
+✅ Example 1: Simple Math
+```python
+import json
+async def solve():
+    # FUNCTION_CALL: 1
+    """Add two numbers. Usage: input={{"input": {{"a": 5, "b": 3}}}} result = await mcp.call_tool('add', input)"""
+    input = {{"input": {{"a": 5, "b": 3}}}}
+    result = await mcp.call_tool('add', input)
+    sum_result = json.loads(result.content[0].text)["result"]
+    return f"FINAL_ANSWER: The sum is {{sum_result}}"
+```
+
+✅ Example 2: Fetching Content for Next Step
+```python
+import json
+async def solve():
+    # FUNCTION_CALL: 1
+    """Return clean webpage content. Usage: input={{"input": {{"url": "https://example.com"}}}} result = await mcp.call_tool('convert_webpage_url_into_markdown', input)"""
+    input = {{"input": {{"url": "https://example.com"}}}}
+    result = await mcp.call_tool('convert_webpage_url_into_markdown', input)
+    # Send the result content for summarization to the *next* agent step. Do not directly send result as "FINAL_ANSWER:"
+    return f"FURTHER_PROCESSING_REQUIRED: {{result.content[0].text}}"
+```
+"""

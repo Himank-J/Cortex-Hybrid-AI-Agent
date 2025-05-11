@@ -1,0 +1,36 @@
+[
+  {
+    "timestamp": 1746970085.53896,
+    "type": "run_metadata",
+    "text": "Started new session with input: Summarize this article for me https://arxiv.org/pdf/2403.12173 at 2025-05-11T13:28:05.538962",
+    "tool_name": null,
+    "tool_args": null,
+    "tool_result": null,
+    "final_answer": null,
+    "tags": [
+      "run_start"
+    ],
+    "success": null,
+    "metadata": {
+      "start_time": "2025-05-11T13:28:05.538976",
+      "step": 0
+    }
+  },
+  {
+    "timestamp": 1746970119.8109722,
+    "type": "run_metadata",
+    "text": "Started new session with input: ummarize this article for me in 100 words - https://arxiv.org/pdf/2403.12173 at 2025-05-11T13:28:39.810974",
+    "tool_name": null,
+    "tool_args": null,
+    "tool_result": null,
+    "final_answer": null,
+    "tags": [
+      "run_start"
+    ],
+    "success": null,
+    "metadata": {
+      "start_time": "2025-05-11T13:28:39.810982",
+      "step": 0
+    }
+  }
+]
