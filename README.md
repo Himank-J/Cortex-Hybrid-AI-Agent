@@ -17,7 +17,7 @@
 - 🔧 **Extensible Tooling**: Add new tools and servers with minimal code changes
 
 ## 📺 Demo
-[![Watch how Mecro works]](https://drive.google.com/file/d/1_tsH8mXZ0QiYa0FYXY87zwofZVDbzxts/view?usp=sharing)
+[Watch how Cortex works](https://drive.google.com/file/d/1_tsH8mXZ0QiYa0FYXY87zwofZVDbzxts/view?usp=sharing)
 
 ## 🐛 Bug Report
 ```bash
